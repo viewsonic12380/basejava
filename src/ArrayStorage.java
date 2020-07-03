@@ -79,11 +79,14 @@ public class ArrayStorage {
     }
 
     public Resume[] removeNull(Resume[] a) {
-        List<Resume> removedNull = new ArrayList<>();
+        Resume[] modified_storage = new Resume[10000];
+        int index = 0;
         for (Resume r : a) {
-            if (r != null)
-                removedNull.add(r);
+            if (r != null) {
+                modified_storage[index] = r;
+                index++;
+            }
         }
-        return removedNull.toArray(new Resume[0]);
+        return modified_storage;
     }
 }
