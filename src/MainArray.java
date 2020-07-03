@@ -10,6 +10,19 @@ public class MainArray {
     private final static ArrayStorage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) throws IOException {
+//        Resume[] storage2 = new Resume[5];
+//        System.out.println("----------------------------");
+//        if (storage2.length == 0) {
+//            System.out.println("Empty");
+//        } else {
+//            for (Resume r : storage2) {
+//                System.out.println(r);
+//            }
+//        }
+//        System.out.println("----------------------------");
+
+
+
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Resume r;
         while (true) {
