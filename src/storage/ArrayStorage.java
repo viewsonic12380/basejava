@@ -16,39 +16,39 @@ public class ArrayStorage {
 //            for (int i = 0; i < size; i++)
 //                storage[i] = null;
 //        }
-        Arrays.fill(storage,null);
+        Arrays.fill(storage, null);
         size = 0;
     }
 
-    public void update(Resume r, String uuid) {
+    public void update(Resume r) {
 //        TODO if resume is not null
         int index = getIndex(r.getUuid());
         if (index == -1)
             System.out.println("Resume " + r.getUuid() + " is not found");
         else
-            r.setUuid(uuid);
+            storage[index]=r;
     }
 
     public void save(Resume r) {
 //        TODO if resume is null
-        int index = getIndex(r.getUuid());
-        if (index == -1) {
-            if (size < storage.length) {
-                storage[size] = r;
-                size++;
-            } else
-                System.out.println("Resume " + r.getUuid() + " is not saved. Array is full.");
-        } else
+        if (getIndex(r.getUuid()) != -1)
             System.out.println("Resume " + r.getUuid() + " is in storage.");
+        else if (size == storage.length)
+            System.out.println("Resume " + r.getUuid() + " is not saved. Array is full.");
+        else {
+            storage[size] = r;
+            size++;
+        }
     }
 
     public Resume get(String uuid) {
         int index = getIndex(uuid);
-        if (index == -1)
+        if (index == -1) {
             System.out.println("Resume " + uuid + " is not found");
-        else
-            return storage[index];
-        return null;
+            return null;
+        }
+        return storage[index];
+
     }
 
 
