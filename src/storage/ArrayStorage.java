@@ -12,14 +12,15 @@ public class ArrayStorage {
     private int size = 0;
 
     public void clear() {
-        if (storage.length != 0) {
-            for (int i = 0; i < size; i++)
-                storage[i] = null;
-        }
+//        if (storage.length != 0) {
+//            for (int i = 0; i < size; i++)
+//                storage[i] = null;
+//        }
+        Arrays.fill(storage,null);
         size = 0;
     }
 
-    public void update(Resume r,String uuid) {
+    public void update(Resume r, String uuid) {
 //        TODO if resume is not null
         int index = getIndex(r.getUuid());
         if (index == -1)
@@ -32,8 +33,11 @@ public class ArrayStorage {
 //        TODO if resume is null
         int index = getIndex(r.getUuid());
         if (index == -1) {
-            storage[size] = r;
-            size++;
+            if (size < storage.length) {
+                storage[size] = r;
+                size++;
+            } else
+                System.out.println("Resume " + r.getUuid() + " is not saved. Array is full.");
         } else
             System.out.println("Resume " + r.getUuid() + " is in storage.");
     }
