@@ -1,15 +1,12 @@
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
-    int current_index_of_null_cell = 0;
-    int size = 0;
+    private Resume[] storage = new Resume[10000];
+    private int current_index_of_null_cell = 0;
+    private int size = 0;
 
-    void clear() {
+    public void clear() {
         if (storage.length != 0) {
             for (int i = 0; i < size; i++)
                 storage[i] = null;
@@ -18,46 +15,35 @@ public class ArrayStorage {
         size = 0;
     }
 
-    void save(Resume r) {
+    public void save(Resume r) {
         storage[current_index_of_null_cell] = r;
         current_index_of_null_cell++;
         size++;
     }
 
-    Resume get(String uuid) {
+    public Resume get(String uuid) {
 //        ArrayList a;
-        int index = -1;
         if (storage.length != 0) {
             for (int i = 0; i < size; i++) {
                 if (uuid.equals(storage[i].uuid)) {
-                    index = i;
-                    break;
+                    return storage[i];
                 }
             }
-            if (index != -1)
-                return storage[index];
-            else
-                return new Resume();
+            return null;
         } else
-            return new Resume();
+            return null;
     }
 
-    void delete(String uuid) {
-        int index = -1;
+    public void delete(String uuid) {
         if (storage.length != 0) {
             int i = 0;
             while (i < size) {
                 if (storage[i].uuid.equals(uuid)) {
-                    index = i;
-                    break;
+                    storage[i]=storage[size-1];
+                    storage[size-1]=null;
+                    size--;
                 }
                 i++;
-            }
-            if (index != -1) {
-                storage[index] = null;
-                Resume[] new_storage = removeNull(storage);
-                storage = new_storage;
-                size--;
             }
         }
     }
@@ -65,7 +51,7 @@ public class ArrayStorage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    Resume[] getAll() {
+    public Resume[] getAll() {
         if (storage.length != 0) {
             Resume[] part_of_storage = new Resume[size];
             System.arraycopy(storage, 0, part_of_storage, 0, size);
@@ -74,19 +60,7 @@ public class ArrayStorage {
             return new Resume[0];
     }
 
-    int size() {
+    public int size() {
         return size;
-    }
-
-    public Resume[] removeNull(Resume[] a) {
-        Resume[] modified_storage = new Resume[10000];
-        int index = 0;
-        for (Resume r : a) {
-            if (r != null) {
-                modified_storage[index] = r;
-                index++;
-            }
-        }
-        return modified_storage;
     }
 }
