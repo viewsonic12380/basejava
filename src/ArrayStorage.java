@@ -15,10 +15,22 @@ public class ArrayStorage {
         size = 0;
     }
 
+    public void update(Resume r) {
+//        TODO if resume is not null
+        if (r != null) {
+
+        }else
+            System.out.println("ERROR");
+    }
+
     public void save(Resume r) {
-        storage[current_index_of_null_cell] = r;
-        current_index_of_null_cell++;
-        size++;
+//        TODO if resume is null
+        if (storage[current_index_of_null_cell] == null) {
+            storage[current_index_of_null_cell] = r;
+            current_index_of_null_cell++;
+            size++;
+        }else
+            System.out.println("ERROR");
     }
 
     public Resume get(String uuid) {
@@ -39,8 +51,8 @@ public class ArrayStorage {
             int i = 0;
             while (i < size) {
                 if (storage[i].uuid.equals(uuid)) {
-                    storage[i]=storage[size-1];
-                    storage[size-1]=null;
+                    storage[i] = storage[size - 1];
+                    storage[size - 1] = null;
                     size--;
                 }
                 i++;
