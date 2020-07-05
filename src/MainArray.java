@@ -1,28 +1,18 @@
+import model.Resume;
+import storage.ArrayStorage;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Interactive test for ArrayStorage implementation
+ * Interactive test for storage.ArrayStorage implementation
  * (just run, no need to understand)
  */
 public class MainArray {
     private final static ArrayStorage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) throws IOException {
-//        Resume[] storage2 = new Resume[5];
-//        System.out.println("----------------------------");
-//        if (storage2.length == 0) {
-//            System.out.println("Empty");
-//        } else {
-//            for (Resume r : storage2) {
-//                System.out.println(r);
-//            }
-//        }
-//        System.out.println("----------------------------");
-
-
-
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Resume r;
         while (true) {
@@ -45,7 +35,7 @@ public class MainArray {
                     break;
                 case "save":
                     r = new Resume();
-                    r.uuid = uuid;
+                    r.setUuid(uuid);
                     ARRAY_STORAGE.save(r);
                     printAll();
                     break;
