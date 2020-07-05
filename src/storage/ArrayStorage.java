@@ -91,7 +91,7 @@ public class ArrayStorage {
         return size;
     }
 
-    protected int getIndex(String uuid) {
+    private int getIndex(String uuid) {
 //        Resume searchKey=new Resume();
 //        searchKey.setUuid(uuid);
 //        return Arrays.binarySearch(storage,0,size,searchKey);
