@@ -2,51 +2,60 @@ package storage;
 
 import model.Resume;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ListStorage extends AbstractStorage{
-    private List<Resume> resumeList;
+public class ListStorage extends AbstractStorage {
 
-    public ListStorage(List<Resume> resumeList) {
-        this.resumeList = resumeList;
+    private List<Resume> list = new ArrayList<>();
+
+    @Override
+    protected Integer getSearchKey(String uuid) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getUuid().equals(uuid)) {
+                return i;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    protected boolean isExist(Object searchKey) {
+        return searchKey != null;
+    }
+
+    @Override
+    protected void doUpdate(Resume r, Object searchKey) {
+        list.set((Integer) searchKey, r);
+    }
+
+    @Override
+    protected void doSave(Resume r, Object searchKey) {
+        list.add(r);
+    }
+
+    @Override
+    protected Resume doGet(Object searchKey) {
+        return list.get((Integer) searchKey);
+    }
+
+    @Override
+    protected void doDelete(Object searchKey) {
+        list.remove(((Integer) searchKey).intValue());
     }
 
     @Override
     public void clear() {
-//        resumeList.removeAll();
-    }
-
-    @Override
-    public void update(Resume r) {
-
-    }
-
-    @Override
-    public void save(Resume r) {
-        resumeList.add(r);
-    }
-
-    @Override
-    public void delete(String uuid) {
-        resumeList.remove(get(uuid));
+        list.clear();
     }
 
     @Override
     public Resume[] getAll() {
-        return (Resume[]) resumeList.toArray();
+        return list.toArray(new Resume[list.size()]);
     }
 
     @Override
     public int size() {
-        return 0;
-    }
-
-    @Override
-    public Resume get(String uuid) {
-        for (Resume r:resumeList) {
-            if (r.getUuid().equals(uuid))
-                return r;
-        }
-        return null;
+        return list.size();
     }
 }
