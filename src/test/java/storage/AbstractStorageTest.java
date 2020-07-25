@@ -2,9 +2,7 @@ package storage;
 
 import exception.ExistStorageException;
 import exception.NonExistStorageException;
-import exception.StorageException;
 import model.Resume;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -57,7 +55,7 @@ public class AbstractStorageTest {
 
     @Test
     public void update() throws Exception {
-        Resume newResume = new Resume(UUID_1);
+        Resume newResume = new Resume(UUID_1,"New name");
         storage.update(newResume);
         assertTrue(newResume == storage.get(UUID_1));
     }
@@ -88,18 +86,18 @@ public class AbstractStorageTest {
         storage.save(RESUME_1);
     }
 
-    // TODO remain only for Arrays implementations
-    @Test(expected = StorageException.class)
-    public void saveOverflow() throws Exception {
-        try {
-            for (int i = 4; i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
-                storage.save(new Resume());
-            }
-        } catch (StorageException e) {
-            Assert.fail();
-        }
-        storage.save(new Resume());
-    }
+//    // TODO remain only for Arrays implementations
+//    @Test(expected = StorageException.class)
+//    public void saveOverflow() throws Exception {
+//        try {
+//            for (int i = 4; i <= AbstractArrayStorage.STORAGE_LIMIT; i++) {
+//                storage.save(new Resume());
+//            }
+//        } catch (StorageException e) {
+//            Assert.fail();
+//        }
+//        storage.save(new Resume());
+//    }
 
     @Test(expected = NonExistStorageException.class)
     public void delete() throws Exception {
