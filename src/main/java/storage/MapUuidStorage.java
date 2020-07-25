@@ -2,8 +2,7 @@ package storage;
 
 import model.Resume;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MapUuidStorage extends AbstractStorage{
     private Map<String, Resume> map = new HashMap<>();
@@ -43,8 +42,8 @@ public class MapUuidStorage extends AbstractStorage{
     }
 
     @Override
-    public Resume[] getAll() {
-        return new Resume[0];
+    protected List<Resume> doCopyAll() {
+        return Collections.emptyList();
     }
 
     @Override
